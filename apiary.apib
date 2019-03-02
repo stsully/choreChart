@@ -1,0 +1,147 @@
+FORMAT: 1A
+HOST: http://private-451649-chorechart.apiary-mock.com
+
+# choreChart
+
+Simple API to select chores for the sullivan fam.
+
+## Chores Collection [/chores]
+
+### List All Chores [GET]
+
+List all chores that are available.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "table",
+                "id":1
+            },{
+                "name": "counters",
+                "id": 2
+            },{
+                "name":"floor",
+                "id": 3
+            },{
+                "name":"pots",
+                "id": 4
+            },{
+                "name":"shoes"
+                "id": 5
+            }
+        ]
+
+## Chores Detail [/chores/{name}]
+
+Use the Chores Detail resource to get the chore detail
+
++ Parameters
+
+    + name (required, string, `pots`) ... Name of the chore
+
+### List Chore Details [GET]
+
+Use this to find out who is on what chore for today
++ Response 200 (application/json)
+
+           {
+                "Chore":"Pots"
+                "day": "Monday",
+                "Worker": "John"
+            }
+
+
+## Day Detail [/chores/{name}/day/{day}]
++ Parameters
+    + name (required, string, `Counters`) ... Name of the chore
+    + day (required, string, `Monday`) ... Day of the week
+    
+
+### List Chores for the Day [GET]
+
+Use this to list out all the chores and their worker for a given day.
+If no day is given, then list for today. 
+
++ Response 200 (application/json)
+
+           {
+                "Chore":"Counters"
+                "day": "Monday"
+                "Worker": "John"
+            }
+            
+            
+
+
+### Create a New Chore [POST]
+
+You may create your own chore chart using this action. It takes a JSON
+object containing chores and their relevant workers.
+
++ Request (application/json)
+
+        {
+            "chore": "Back Yard",
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /chores/{id}
+
+    + Body
+
+            {
+                "name":"Back Yard"
+                "id": 6
+            }
+
+## Workers Collection [/workers]
+
+### List all Workers [GET]
+
+List all available workers.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "John",
+                "id":1
+            },{
+                "name": "Josie",
+                "id": 2
+            },{
+                "name":"Charlie",
+                "id": 3
+            },{
+                "name":"Mary",
+                "id": 4
+            },{
+                "name":"Stella"
+                "id": 5
+            }
+        ]
+## Worker Detail [/worker/{name}/day/{day}]
++ Parameters
+    + name (required, string, `Stella`) ... Name of the worker
+    + day (required, string, `Monday`) ... Day of the week default: today
+
+    
+### List chores for worker by day [GET]
+
+List all chores, for a given worker, for today (default) or any day
+
++ Response 200 (application/json)
+
+        {
+            "name": "Stella",
+            "day": "Monday",
+            "chores": [
+                "name": "table",
+                "name": "playroom right table",
+                "name": "Hall and Bath"
+            ]
+        }
