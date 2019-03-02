@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>sullivanfam.org chore chart</title>
+    <script src="/static/chores.js"></script>
+    <link href="/static/chores.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    <body>
+      <div id="container">
+        <div id="page-header">
+          <h1> Sullivan Chore Chart </h1>
+          <p> Always do your chores.</p>
+          <form action="/">
+            <input type=submit name="name" value="all chores"></input>
+          </form>
+        </div>
+        <div id="chart">
+          <table>
+            <tr>
+              <th>Job</th>
+              <th>{{ dayOfWeek }}</th>
+            </tr>
+            {% for entry in entries %}
+            <tr>
+              <td>{{ entry[0] }}</td>
+              <td class="{{ entry[1]|lower}}">{{ entry[1] }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </body>
+  </html>
